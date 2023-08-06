@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
+import { Title } from '@angular/platform-browser';
 
 //Declaring the api url that will provide data for the client app
 const apiUrl = 'https://mirror-stage.herokuapp.com/';
@@ -9,7 +10,7 @@ const apiUrl = 'https://mirror-stage.herokuapp.com/';
 @Injectable({
   providedIn: 'root'
 })
-export class UserRegistrationService {
+export class FetchApiDataService {
   // Inject the HttpClient module to the constructor params
  // This will provide HttpClient to the entire class, making it available via this.http
   constructor(private http: HttpClient) {
@@ -34,26 +35,26 @@ export class UserRegistrationService {
     );
   }
 
-  getMovie(movieId: string): Observable<any> {
-    return this.http.get(apiUrl + 'movies/' + movieId).pipe(
+  getOneMovie(title: string): Observable<any> {
+    return this.http.get(apiUrl + 'movies/' + title).pipe(
       catchError(this.handleError)
     );
   }
 
-  getDirector(directorId: string): Observable<any> {
-    return this.http.get(apiUrl + 'directors/' + directorId).pipe(
+  getOnedirector(directorName: string): Observable<any> {
+    return this.http.get(apiUrl + 'directors/' + directorName).pipe(
       catchError(this.handleError)
     );
   }
 
-  getGenre(genreId: string): Observable<any> {
-    return this.http.get(apiUrl + 'genres/' + genreId).pipe(
+  getOnegenre(genreName: string): Observable<any> {
+    return this.http.get(apiUrl + 'genres/' + genreName).pipe(
       catchError(this.handleError)
     );
   }
 
-  getUser(userId: string): Observable<any> {
-    return this.http.get(apiUrl + 'users/' + userId).pipe(
+  getOneuser(userName: string): Observable<any> {
+    return this.http.get(apiUrl + 'users/' + userName).pipe(
       catchError(this.handleError)
     );
   }
@@ -76,8 +77,8 @@ export class UserRegistrationService {
     );
   }
 
-  deleteUser(userId: string): Observable<any> {
-    return this.http.delete(apiUrl + 'users/' + userId).pipe(
+  deleteUser(userName: string): Observable<any> {
+    return this.http.delete(apiUrl + 'users/' + userName).pipe(
       catchError(this.handleError)
     );
   }
