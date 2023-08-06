@@ -42,13 +42,13 @@ export class FetchApiDataService {
   }
 
   getOnedirector(directorName: string): Observable<any> {
-    return this.http.get(apiUrl + 'directors/' + directorName).pipe(
+    return this.http.get(apiUrl + 'movies/directors/' + directorName).pipe(
       catchError(this.handleError)
     );
   }
 
   getOnegenre(genreName: string): Observable<any> {
-    return this.http.get(apiUrl + 'genres/' + genreName).pipe(
+    return this.http.get(apiUrl + 'movies/genres/' + genreName).pipe(
       catchError(this.handleError)
     );
   }
@@ -59,20 +59,20 @@ export class FetchApiDataService {
     );
   }
 
-  getFavoriteMovies(userId: string): Observable<any> {
-    return this.http.get(apiUrl + 'users/' + userId + '/movies').pipe(
+  getFavoriteMovies(userName: string): Observable<any> {
+    return this.http.get(apiUrl + 'users/' + userName + '/movies').pipe(
       catchError(this.handleError)
     );
   }
 
-  addMovieToFavorites(userId: string, movieId: string): Observable<any> {
-    return this.http.post(apiUrl + 'users/' + userId + '/movies/' + movieId, {}).pipe(
+  addMovieToFavorites(userName: string, movieId: string): Observable<any> {
+    return this.http.post(apiUrl + 'users/' + userName+ '/movies/' + movieId, {}).pipe(
       catchError(this.handleError)
     );
   }
 
-  editUser(userId: string, userDetails: any): Observable<any> {
-    return this.http.put(apiUrl + 'users/' + userId, userDetails).pipe(
+  editUser(userName: string, userDetails: any): Observable<any> {
+    return this.http.put(apiUrl + 'users/' + userName, userDetails).pipe(
       catchError(this.handleError)
     );
   }
@@ -83,8 +83,8 @@ export class FetchApiDataService {
     );
   }
 
-  deleteMovieFromFavorites(userId: string, movieId: string): Observable<any> {
-    return this.http.delete(apiUrl + 'users/' + userId + '/movies/' + movieId).pipe(
+  deleteMovieFromFavorites(userName: string, movieId: string): Observable<any> {
+    return this.http.delete(apiUrl + 'users/' + userName + '/movies/' + movieId).pipe(
       catchError(this.handleError)
     );
   }
