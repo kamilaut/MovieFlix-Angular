@@ -1,1 +1,19 @@
-<p>welcome-page works!</p>
+<div class="main-page">
+  <h1>Hi there!</h1>
+  <button
+    mat-raised-button
+    (click)="openRegistrationDialog()"
+    style="margin-right: 10px"
+    color="primary"
+  >
+    Sign Up
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="openUserLoginDialog()"
+    style="margin-right: 10px"
+  >
+    Login
+  </button>
+</div>
