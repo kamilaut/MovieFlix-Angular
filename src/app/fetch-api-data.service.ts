@@ -2,27 +2,37 @@ import { Injectable } from '@angular/core';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { Title } from '@angular/platform-browser';
 
-//Declaring the api url that will provide data for the client app
 const apiUrl = 'https://mirror-stage.herokuapp.com/';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FetchApiDataService {
-  // Inject the HttpClient module to the constructor params
- // This will provide HttpClient to the entire class, making it available via this.http
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient) {}
+
+  private getHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders({
+      Authorization: 'Bearer ' + token
+    });
   }
- // Making the api call for the user registration endpoint
-  public userRegistration(userDetails: any): Observable<any> {
-    console.log(userDetails);
-    return this.http.post(apiUrl + 'users', userDetails).pipe(
+
+  private request<T>(method: string, url: string, body?: any): Observable<any> {
+  const headers = this.getHeaders();
+  return this.http.request(method, url, {
+    body,
+    headers
+  }).pipe(
     catchError(this.handleError)
+  );
+}
+  public userRegistration(userDetails: any): Observable<any> {
+    return this.http.post(apiUrl + 'users', userDetails).pipe(
+      catchError(this.handleError)
     );
   }
-  
+
   userLogin(credentials: any): Observable<any> {
     return this.http.post(apiUrl + 'login', credentials).pipe(
       catchError(this.handleError)
@@ -30,20 +40,7 @@ export class FetchApiDataService {
   }
 
   getAllMovies(): Observable<any> {
-    const token = localStorage.getItem('token');
-    return this.http.get<Response>(apiUrl + 'movies', {
-      headers: new HttpHeaders(
-        {
-          Authorization: 'Bearer ' + token,
-        })
-    }).pipe(
-      map(this.extractResponseData),
-      catchError(this.handleError)
-    );
-  }
-  private extractResponseData(res: Response): any {
-    const body = res;
-    return body || { };
+    return this.request<any>('GET', apiUrl + 'movies');
   }
   
   getOneMovie(title: string): Observable<any> {
@@ -65,7 +62,7 @@ export class FetchApiDataService {
   }
 
   getOneuser(userName: string): Observable<any> {
-    return this.http.get(apiUrl + 'users/' + userName).pipe(
+    return this.request<any>('GET', apiUrl + 'users/' + userName).pipe(
       catchError(this.handleError)
     );
   }
@@ -83,13 +80,15 @@ export class FetchApiDataService {
   }
 
   editUser(userName: string, userDetails: any): Observable<any> {
-    return this.http.put(apiUrl + 'users/' + userName, userDetails).pipe(
+    const headers = this.getHeaders();
+    return this.http.put(apiUrl + 'users/' + userName, userDetails, { headers }).pipe(
       catchError(this.handleError)
     );
   }
-
+  
   deleteUser(userName: string): Observable<any> {
-    return this.http.delete(apiUrl + 'users/' + userName).pipe(
+    const headers = this.getHeaders();
+    return this.http.delete(apiUrl + 'users/' + userName, { headers }).pipe(
       catchError(this.handleError)
     );
   }
@@ -100,16 +99,15 @@ export class FetchApiDataService {
     );
   }
 
-private handleError(error: HttpErrorResponse): any {
+  private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
-    console.error('Some error occurred:', error.error.message);
+      console.error('Some error occurred:', error.error.message);
     } else {
-    console.error(
+      console.error(
         `Error Status code ${error.status}, ` +
-        `Error body is: ${error.error}`);
+        `Error body is: ${error.error}`
+      );
     }
-    return throwError(
-    'Something bad happened; please try again later.');
+    return throwError('Something bad happened; please try again later.');
   }
-  
 }

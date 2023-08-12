@@ -1,0 +1,40 @@
+<mat-card *ngIf="user">
+  <mat-card-header>
+    <mat-card-title>Your Profile</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p><strong>Username:</strong> {{ user.username }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+
+    <button mat-raised-button color="primary" (click)="editMode = !editMode">
+      Edit Profile
+    </button>
+
+    <div *ngIf="editMode">
+      <h3>Edit Profile</h3>
+      <form (ngSubmit)="saveChanges()" #profileForm="ngForm">
+        <mat-form-field>
+          <input
+            matInput
+            type="text"
+            name="username"
+            [(ngModel)]="editedUser.username"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            type="email"
+            name="email"
+            [(ngModel)]="editedUser.email"
+            required
+          />
+        </mat-form-field>
+        <button mat-raised-button color="accent" type="submit">
+          Save Changes
+        </button>
+      </form>
+    </div>
+  </mat-card-content>
+</mat-card>
