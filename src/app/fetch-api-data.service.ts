@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { Title } from '@angular/platform-browser';
@@ -30,11 +30,22 @@ export class FetchApiDataService {
   }
 
   getAllMovies(): Observable<any> {
-    return this.http.get(apiUrl + 'movies').pipe(
+    const token = localStorage.getItem('token');
+    return this.http.get<Response>(apiUrl + 'movies', {
+      headers: new HttpHeaders(
+        {
+          Authorization: 'Bearer ' + token,
+        })
+    }).pipe(
+      map(this.extractResponseData),
       catchError(this.handleError)
     );
   }
-
+  private extractResponseData(res: Response): any {
+    const body = res;
+    return body || { };
+  }
+  
   getOneMovie(title: string): Observable<any> {
     return this.http.get(apiUrl + 'movies/' + title).pipe(
       catchError(this.handleError)
