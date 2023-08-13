@@ -11,27 +11,33 @@ export class UserProfileComponent implements OnInit {
   user: any;
   editMode = false;
   editedUser: any = {};
-  
+
   constructor(
     private fetchApiData: FetchApiDataService,
-    private router: Router,
-  ) { }
-  
-  
+    private router: Router
+  ) {}
+
   ngOnInit(): void {
-    this.fetchApiData.getOneuser('userName').subscribe((response: any) => {
-      this.user = response;
-      this.editedUser = { ...this.user };  
-    });
+    const userName = localStorage.getItem('user');  
+    if (userName) {
+      this.fetchApiData.getOneuser(userName).subscribe((response: any) => {  
+        this.user = response;
+        this.editedUser = { ...this.user };
+        console.log('User Profile:', this.user);  
+      });
+    }
   }
   
   saveChanges(): void {
-    this.fetchApiData.editUser('userName', this.editedUser).subscribe((response: any) => {
-      this.user = response;
-      this.editMode = false;
-      this.router.navigate(['/profile']);
-    });
+    const loggedInUserName = localStorage.getItem('username');  
+    if (loggedInUserName) {
+      this.fetchApiData.editUser(loggedInUserName, this.editedUser).subscribe((response: any) => {
+        this.user = response;
+        this.editMode = false;
+        this.router.navigate(['/profile']);
+      });
+    } else {
+      console.error('Logged-in user username not found in localStorage');
+    }
   }
-  
 }
-
