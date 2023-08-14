@@ -40,20 +40,20 @@ const appRoutes: Routes = [
     MovieDetailsDialogComponent,
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
-    MatCardModule,
-    FormsModule,
     BrowserModule,
+    BrowserAnimationsModule,
+    BrowserModule,
+    FormsModule,
+    MatCardModule,
+    MatIconModule,
     MatDialogModule,
     MatInputModule,
     MatButtonModule,
     MatFormFieldModule,
     MatSnackBarModule,
-    BrowserAnimationsModule,
-    RouterModule.forRoot(appRoutes),
-    MatIconModule
+    HttpClientModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]
