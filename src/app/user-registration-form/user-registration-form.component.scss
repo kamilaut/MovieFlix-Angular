@@ -1,0 +1,40 @@
+.form-card {
+    background-color: #fcfcfb;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 16px;
+    margin: 0 auto;
+    max-width: 400px;
+  
+    mat-card-title,
+    mat-card-subtitle {
+      color: #31302f;
+    }
+  
+    form {
+      mat-form-field {
+        width: 100%;
+  
+        input {
+          color: #31302f;
+        }
+      }
+    }
+  
+    mat-card-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 16px;
+  
+      button {
+        margin-left: 8px;
+        background-color: #f5cd90;
+        color: #31302f;
+  
+        &:hover {
+          background-color: darken(#f5cd90, 10%);
+        }
+      }
+    }
+  }
+  
