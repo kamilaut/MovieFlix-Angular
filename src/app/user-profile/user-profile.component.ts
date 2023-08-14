@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class UserProfileComponent implements OnInit {
   user: any;
+  favoriteMovies: any[] = [];
   editMode = false;
   editedUser: any = {};
 
@@ -22,9 +23,12 @@ export class UserProfileComponent implements OnInit {
         this.editedUser = { ...this.user };
         console.log('User Profile:', this.user);
       });
+
+      this.fetchApiData.getFavoriteMovies(userName).subscribe((response: any) => {
+        this.favoriteMovies = response;
+      });
     }
   }
-
   saveChanges(): void {
     const loggedInUserName = localStorage.getItem('username');
     if (loggedInUserName) {
@@ -40,5 +44,13 @@ export class UserProfileComponent implements OnInit {
   goBack(): void {
     this.router.navigate(['/movies']); 
   }
-}
 
+removeFromFavorites(movieId: string): void {
+  const userName = localStorage.getItem('user');
+  if (userName) {
+    this.fetchApiData.deleteMovieFromFavorites(userName, movieId).subscribe(() => {
+      this.favoriteMovies = this.favoriteMovies.filter((movie) => movie._id !== movieId);
+    });
+  }
+}
+}

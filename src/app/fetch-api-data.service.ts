@@ -66,7 +66,7 @@ export class FetchApiDataService {
       catchError(this.handleError)
     );
   }
-
+  
   getFavoriteMovies(userName: string): Observable<any> {
     return this.http.get(apiUrl + 'users/' + userName + '/movies').pipe(
       catchError(this.handleError)

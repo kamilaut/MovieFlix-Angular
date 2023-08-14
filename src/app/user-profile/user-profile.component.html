@@ -39,6 +39,22 @@
         </button>
       </form>
     </div>
+
+    <div class="favorite-movies">
+      <h3>Favorite Movies</h3>
+      <ul>
+        <li *ngFor="let movie of favoriteMovies">
+          {{ movie.title }}
+          <button
+            mat-icon-button
+            color="secondary"
+            (click)="removeFromFavorites(movie._id)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </li>
+      </ul>
+    </div>
   </mat-card-content>
   <mat-card-actions>
     <button mat-button color="primary" (click)="goBack()">Back</button>
