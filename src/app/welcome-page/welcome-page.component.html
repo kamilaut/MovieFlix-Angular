@@ -1,19 +1,18 @@
+<!-- welcome-page.component.html -->
 <div class="main-page">
-  <h1>Hi there!</h1>
-  <button
-    mat-raised-button
-    (click)="openRegistrationDialog()"
-    style="margin-right: 10px"
-    color="primary"
-  >
-    Sign Up
-  </button>
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="openUserLoginDialog()"
-    style="margin-right: 10px"
-  >
-    Login
-  </button>
+  <div class="content">
+    <div class="accent-window">
+      <h1 class="welcome-title mat-display-2">Welcome to MovieFlix!</h1>
+      <p class="welcome-description mat-body-1">
+        Where your real-life drama takes a back seat and your precious time is
+        systematically chipped away one captivating film at a time! 🍿
+      </p>
+    </div>
+  </div>
+  <div class="buttons">
+    <button mat-raised-button (click)="openRegistrationDialog()">
+      Sign Up
+    </button>
+    <button mat-raised-button (click)="openUserLoginDialog()">Login</button>
+  </div>
 </div>
