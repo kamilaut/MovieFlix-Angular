@@ -5,8 +5,8 @@
   </mat-card-header>
   <mat-card-content>
     <div class="profile-details">
-      <p><strong>Username:</strong> {{ user.username }}</p>
-      <p><strong>Email:</strong> {{ user.email }}</p>
+      <p><strong>Username:</strong> {{ user.userName }}</p>
+      <p><strong>Email:</strong> {{ user.Email }}</p>
     </div>
 
     <button mat-raised-button color="primary" (click)="editMode = !editMode">
@@ -20,17 +20,20 @@
           <input
             matInput
             type="text"
-            name="username"
-            [(ngModel)]="editedUser.username"
+            name="userName"
+            [(ngModel)]="editedUser.userName"
             required
           />
         </mat-form-field>
+        <mat-card-actions>
+          <button mat-button color="primary" (click)="goBack()">Back</button>
+        </mat-card-actions>
         <mat-form-field>
           <input
             matInput
             type="email"
-            name="email"
-            [(ngModel)]="editedUser.email"
+            name="Email"
+            [(ngModel)]="editedUser.Email"
             required
           />
         </mat-form-field>
@@ -44,7 +47,7 @@
       <h3>Favorite Movies</h3>
       <ul>
         <li *ngFor="let movie of favoriteMovies">
-          {{ movie.title }}
+          {{ movie.Title }}
           <button
             mat-icon-button
             color="secondary"
@@ -54,9 +57,6 @@
           </button>
         </li>
       </ul>
-    </div>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-button color="primary" (click)="goBack()">Back</button>
-  </mat-card-actions>
-</mat-card>
+    </div></mat-card-content
+  ></mat-card
+>

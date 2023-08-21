@@ -23,14 +23,18 @@ export class UserProfileComponent implements OnInit {
         this.editedUser = { ...this.user };
         console.log('User Profile:', this.user);
       });
-
-      this.fetchApiData.getFavoriteMovies(userName).subscribe((response: any) => {
-        this.favoriteMovies = response;
+  
+      this.fetchApiData.getAllMovies().subscribe((moviesResponse: any) => {
+        this.favoriteMovies = [];  
+        this.favoriteMovies = moviesResponse.filter((movie: any) =>
+          this.favoriteMovies.includes(movie._id)
+        );
       });
     }
   }
+
   saveChanges(): void {
-    const loggedInUserName = localStorage.getItem('username');
+    const loggedInUserName = localStorage.getItem('userName');
     if (loggedInUserName) {
       this.fetchApiData.editUser(loggedInUserName, this.editedUser).subscribe((response: any) => {
         this.user = response;
@@ -45,12 +49,12 @@ export class UserProfileComponent implements OnInit {
     this.router.navigate(['/movies']); 
   }
 
-removeFromFavorites(movieId: string): void {
-  const userName = localStorage.getItem('user');
-  if (userName) {
-    this.fetchApiData.deleteMovieFromFavorites(userName, movieId).subscribe(() => {
-      this.favoriteMovies = this.favoriteMovies.filter((movie) => movie._id !== movieId);
-    });
+  removeFromFavorites(movieId: string): void {
+    const userName = localStorage.getItem('user');
+    if (userName) {
+      this.fetchApiData.deleteMovieFromFavorites(userName, movieId).subscribe(() => {
+        this.favoriteMovies = this.favoriteMovies.filter((movie) => movie._id !== movieId);
+      });
+    }
   }
-}
 }
