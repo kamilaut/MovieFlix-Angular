@@ -10,6 +10,7 @@ import { MovieDetailsDialogComponent } from '../movie-details-dialog/movie-detai
 })
 export class MovieCardComponent implements OnInit {
   movies: any[] = [];
+  favoriteMoviesIDs: any[] = [];
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -18,6 +19,17 @@ export class MovieCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMovies();
+    this.getFavoriteMovies();
+  }
+  
+  getFavoriteMovies(): void {
+    const userName = localStorage.getItem('user');
+    if (userName){
+      this.fetchApiData.getOneuser(userName).subscribe((response: any) => {
+        this.favoriteMoviesIDs = response.FavoriteMovies;
+      })
+    
+    }
   }
 
   getMovies(): void {
@@ -33,11 +45,22 @@ export class MovieCardComponent implements OnInit {
       data: { type, data }
     });
   }
+  
+  removeFromFavorites(movieId: string): void {
+    const userName = localStorage.getItem('user');
+    if (userName){
+      this.fetchApiData.deleteMovieFromFavorites(userName, movieId).subscribe((response: any) => {
+       this.favoriteMoviesIDs = this.favoriteMoviesIDs.filter(id => id !== movieId);
+        console.log('Movie removed');
+      });
+      }
+  }
 
   addToFavorites(movieId: string): void {
     const userName = localStorage.getItem('user');
     if (userName) {
       this.fetchApiData.addMovieToFavorites(userName, movieId).subscribe((response: any) => {
+        this.favoriteMoviesIDs.push(movieId);
         console.log('Movie added to favorites:', response);
       });
     }

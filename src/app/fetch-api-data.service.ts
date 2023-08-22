@@ -74,7 +74,7 @@ export class FetchApiDataService {
   }
 
   addMovieToFavorites(userName: string, movieId: string): Observable<any> {
-    return this.http.post(apiUrl + 'users/' + userName+ '/movies/' + movieId, {}).pipe(
+    return this.request('POST', apiUrl + 'users/' + userName+ '/movies/' + movieId, {}).pipe(
       catchError(this.handleError)
     );
   }
@@ -94,7 +94,7 @@ export class FetchApiDataService {
   }
 
   deleteMovieFromFavorites(userName: string, movieId: string): Observable<any> {
-    return this.http.delete(apiUrl + 'users/' + userName + '/movies/' + movieId).pipe(
+    return this.request('DELETE', apiUrl + 'users/' + userName + '/movies/' + movieId).pipe(
       catchError(this.handleError)
     );
   }

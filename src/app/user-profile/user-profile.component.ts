@@ -22,13 +22,12 @@ export class UserProfileComponent implements OnInit {
         this.user = response;
         this.editedUser = { ...this.user };
         console.log('User Profile:', this.user);
-      });
-  
-      this.fetchApiData.getAllMovies().subscribe((moviesResponse: any) => {
-        this.favoriteMovies = [];  
-        this.favoriteMovies = moviesResponse.filter((movie: any) =>
-          this.favoriteMovies.includes(movie._id)
-        );
+        this.fetchApiData.getAllMovies().subscribe((moviesResponse: any) => {
+          this.favoriteMovies = [];  
+          this.favoriteMovies = moviesResponse.filter((movie: any) =>
+            this.user.FavoriteMovies.includes(movie._id)
+          );
+        });
       });
     }
   }

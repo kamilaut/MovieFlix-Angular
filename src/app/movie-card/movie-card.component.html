@@ -32,11 +32,20 @@
         Synopsis
       </button>
       <button
+        *ngIf="!favoriteMoviesIDs.includes(movie._id)"
         mat-icon-button
         color="secondary"
         (click)="addToFavorites(movie._id)"
       >
         <mat-icon>favorite_border</mat-icon>
+      </button>
+      <button
+        *ngIf="favoriteMoviesIDs.includes(movie._id)"
+        mat-icon-button
+        color="secondary"
+        (click)="removeFromFavorites(movie._id)"
+      >
+        <mat-icon>favorite_fill</mat-icon>
       </button>
     </mat-card-actions>
   </mat-card>
