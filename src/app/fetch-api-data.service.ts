@@ -80,8 +80,7 @@ export class FetchApiDataService {
   }
 
   editUser(userName: string, userDetails: any): Observable<any> {
-    const headers = this.getHeaders();
-    return this.http.put(apiUrl + 'users/' + userName, userDetails, { headers }).pipe(
+    return this.request('PUT', apiUrl + 'users/' + userName, userDetails).pipe(
       catchError(this.handleError)
     );
   }

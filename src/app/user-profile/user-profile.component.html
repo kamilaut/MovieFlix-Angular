@@ -1,7 +1,9 @@
 <app-navbar></app-navbar>
 <mat-card *ngIf="user" class="profile-card">
   <mat-card-header>
-    <mat-card-title>Your Profile</mat-card-title>
+    <mat-card-title
+      ><p><strong>Your Profile</strong></p></mat-card-title
+    >
   </mat-card-header>
   <mat-card-content>
     <div class="profile-details">
@@ -9,7 +11,7 @@
       <p><strong>Email:</strong> {{ user.Email }}</p>
     </div>
 
-    <button mat-raised-button color="primary" (click)="editMode = !editMode">
+    <button mat-raised-button (click)="editMode = !editMode">
       {{ editMode ? "Cancel" : "Edit Profile" }}
     </button>
 
@@ -19,15 +21,12 @@
         <mat-form-field>
           <input
             matInput
-            type="text"
-            name="username"
-            [(ngModel)]="editedUser.Username"
+            type="date"
+            name="Birthday"
+            [(ngModel)]="editedUser.Birthday"
             required
           />
         </mat-form-field>
-        <mat-card-actions>
-          <button mat-button color="primary" (click)="goBack()">Back</button>
-        </mat-card-actions>
         <mat-form-field>
           <input
             matInput
@@ -37,9 +36,7 @@
             required
           />
         </mat-form-field>
-        <button mat-raised-button color="accent" type="submit">
-          Save Changes
-        </button>
+        <button mat-raised-button type="submit">Save Changes</button>
       </form>
     </div>
 
@@ -57,6 +54,6 @@
           </button>
         </li>
       </ul>
-    </div></mat-card-content
-  ></mat-card
->
+    </div>
+  </mat-card-content>
+</mat-card>

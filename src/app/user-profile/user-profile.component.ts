@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class UserProfileComponent implements OnInit {
   user: any;
+  birthday: any;
   favoriteMovies: any[] = [];
   editMode = false;
   editedUser: any = {};
@@ -33,8 +34,12 @@ export class UserProfileComponent implements OnInit {
   }
 
   saveChanges(): void {
-    const loggedInUserName = localStorage.getItem('userName');
+    const loggedInUserName = localStorage.getItem('user');
     if (loggedInUserName) {
+      delete this.editedUser.Username;
+
+      this.editedUser.Birthday = this.birthday;
+  
       this.fetchApiData.editUser(loggedInUserName, this.editedUser).subscribe((response: any) => {
         this.user = response;
         this.editMode = false;
@@ -43,6 +48,7 @@ export class UserProfileComponent implements OnInit {
       console.error('Logged-in user username not found in localStorage');
     }
   }
+  
 
   goBack(): void {
     this.router.navigate(['/movies']); 

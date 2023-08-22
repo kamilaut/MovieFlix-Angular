@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <div class="movie-card-container">
   <mat-card *ngFor="let movie of movies" class="movie-card">
-    <mat-card-header>
+    <mat-card-header style="background-color: (245, 205, 144, 0.6)">
       <mat-card-title>{{ movie.Title }}</mat-card-title>
     </mat-card-header>
     <img
@@ -13,6 +13,7 @@
       <button
         mat-button
         color="primary"
+        style="color: #31302f"
         (click)="openDialog('genre', movie.Genre)"
       >
         Genre
@@ -20,6 +21,7 @@
       <button
         mat-button
         color="primary"
+        style="color: #31302f"
         (click)="openDialog('director', movie.Director.Name)"
       >
         Director
@@ -27,6 +29,7 @@
       <button
         mat-button
         color="primary"
+        style="color: #31302f"
         (click)="openDialog('synopsis', movie.Description)"
       >
         Synopsis

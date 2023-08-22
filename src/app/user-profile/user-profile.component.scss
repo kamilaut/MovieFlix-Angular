@@ -1,27 +1,48 @@
 .profile-card {
-    max-width: 400px;
-    margin: 0 auto;
-  }
-  
-  .profile-details {
+  max-width: 400px;
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.profile-details {
+  margin-bottom: 16px;
+}
+
+.edit-profile {
+  margin-top: 24px;
+
+  h3 {
     margin-bottom: 16px;
   }
-  
-  .edit-profile {
-    margin-top: 24px;
-  
-    h3 {
-      margin-bottom: 16px;
-    }
-  
-    mat-form-field {
-      width: 100%;
-      margin-bottom: 12px;
+
+  mat-form-field {
+    width: 100%;
+    margin-bottom: 12px;
+  }
+}
+
+.favorite-movies {
+  margin-top: 24px;
+
+  h3 {
+    margin-bottom: 12px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+
+      button {
+        background-color: rgba(245, 205, 144, 0.6);
+        
+      }
     }
   }
-  
-  .mat-card-actions {
-    display: flex;
-    justify-content: flex-end;
-    padding: 16px;
-  }
+}
