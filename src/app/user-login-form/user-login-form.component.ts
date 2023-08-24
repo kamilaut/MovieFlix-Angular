@@ -26,10 +26,7 @@ export class UserLoginFormComponent implements OnInit {
   loginUser(): void {
   this.fetchApiData.userLogin(this.loginData).subscribe(
     (response) => {
-      const updatedUsername = localStorage.getItem('user');
-      if (updatedUsername) {
-        this.loginData.Username = updatedUsername;
-      }
+      localStorage.setItem('user', response.user.Username );
       localStorage.setItem('token', response.token);
       this.dialogRef.close();
       this.snackBar.open('User Login successful', 'Ok', {

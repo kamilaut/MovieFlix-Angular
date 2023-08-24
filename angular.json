@@ -16,6 +16,7 @@
             "outputPath": "dist/my-flix-angular-client",
             "index": "src/index.html",
             "main": "src/main.ts",
+            "baseHref": "/MovieFlix-Angular/",
             "polyfills": [
               "zone.js"
             ],
@@ -91,6 +92,9 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }

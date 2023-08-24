@@ -9,15 +9,29 @@
     <div class="profile-details">
       <p><strong>Username:</strong> {{ user.Username }}</p>
       <p><strong>Email:</strong> {{ user.Email }}</p>
+      <p><strong>Birthday</strong> {{ user.Birthday }}</p>
     </div>
 
     <button mat-raised-button (click)="editMode = !editMode">
       {{ editMode ? "Cancel" : "Edit Profile" }}
     </button>
 
+    <button mat-raised-button (click)="deleteUserAccount()">
+      Delete Account
+    </button>
+
     <div *ngIf="editMode" class="edit-profile">
       <h3>Edit Profile</h3>
       <form (ngSubmit)="saveChanges()" #profileForm="ngForm">
+        <mat-form-field>
+          <input
+            matInput
+            type="text"
+            name="Username"
+            [(ngModel)]="editedUser.Username"
+            required
+          />
+        </mat-form-field>
         <mat-form-field>
           <input
             matInput
@@ -33,6 +47,15 @@
             type="email"
             name="Email"
             [(ngModel)]="editedUser.Email"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            type="password"
+            name="Password"
+            [(ngModel)]="editedUser.Password"
             required
           />
         </mat-form-field>
