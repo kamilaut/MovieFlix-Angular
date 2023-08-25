@@ -3,6 +3,24 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+/**
+ * UserProfileComponent class
+ * 
+ * @remarks
+ * This class is responsible for managing the user profile.
+ * 
+ * @property user - Stores the user data
+ * @property birthday - Stores the user's birthday
+ * @property favoriteMovies - Stores the user's favorite movies
+ * @property editMode - A boolean to check if the user is in edit mode
+ * @property editedUser - Stores the edited user data
+ * 
+ * @method ngOnInit - Fetches the user data and favorite movies on initialization
+ * @method saveChanges - Saves the changes made to the user profile
+ * @method goBack - Navigates back to the movies page
+ * @method removeFromFavorites - Removes a movie from the user's favorites
+ */
+
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',

@@ -7,7 +7,13 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
-
+/**
+ * UserRegistrationFormComponent is a component responsible for handling user registration.
+ * 
+ * @selector app-user-registration-form
+ * @templateUrl ./user-registration-form.component.html
+ * @styleUrls ['./user-registration-form.component.scss']
+ */
 
 @Component({
   selector: 'app-user-registration-form',
@@ -15,19 +21,36 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-registration-form.component.scss']
 })
 export class UserRegistrationFormComponent implements OnInit {
-
+/**
+   * @Input() userData - An object that holds the user data entered in the registration form.
+   */
   @Input() userData = { Username: '', Password: '', Email: '', Birthday: '' };
-
+ /**
+   * Constructor for the UserRegistrationFormComponent.
+   * 
+   * @param fetchApiData - Service for making API calls.
+   * @param dialogRef - Reference to the dialog opened.
+   * @param snackBar - Service for opening snackbars.
+   * @param router - Angular's Router.
+   */
 constructor(
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserRegistrationFormComponent>,
     public snackBar: MatSnackBar,
     private router: Router) 
     { }
-
+ /**
+   * Angular's OnInit lifecycle hook.
+   */
 ngOnInit(): void {
 }
 
+  /**
+   * registerUser() is a method responsible for sending the form inputs to the backend.
+   * On successful registration, it closes the dialog, navigates to the root URL, and opens a snackbar with a success message.
+   * On failure, it opens a snackbar with an error message.
+   */
+  
 // This is the function responsible for sending the form inputs to the backend
 registerUser(): void {
     this.fetchApiData.userRegistration(this.userData).subscribe((result) => {
