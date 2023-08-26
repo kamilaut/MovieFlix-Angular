@@ -1,4 +1,4 @@
-# MovieFlixAngularClient
+# MovieFlixAngular
 
 This is a web application built with Angular that allows users to browse, search, and get detailed information about movies. The application also supports user registration and profile management. This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.7. 
 
